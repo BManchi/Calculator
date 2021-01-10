@@ -89,7 +89,7 @@ class MainActivity : AppCompatActivity() {
         buttonDivide.setOnClickListener(opListener)
         buttonNeg.setOnClickListener(opListener)
 
-        buttonNeg.setOnClickListener { View ->
+        buttonNeg.setOnClickListener {
             val value = newNumber.text.toString()
             if (value.isEmpty()) {
                 newNumber.setText("-")
