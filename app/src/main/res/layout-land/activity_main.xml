@@ -68,7 +68,7 @@
         android:id="@+id/button8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="8dp"
         android:minWidth="48dp"
         android:text="8"
         app:layout_constraintBaseline_toBaselineOf="@+id/button9"
@@ -78,11 +78,11 @@
         android:id="@+id/button9"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:minWidth="48dp"
         android:text="9"
-        app:layout_constraintStart_toStartOf="@+id/guideline3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/result" />
 
     <Button
@@ -134,6 +134,17 @@
         android:text="/"
         app:layout_constraintBaseline_toBaselineOf="@+id/button9"
         app:layout_constraintStart_toEndOf="@+id/button9" />
+
+    <Button
+        android:id="@+id/buttonNeg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:minWidth="48dp"
+        android:text="NEG"
+        android:textSize="8sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/divide"
+        app:layout_constraintStart_toEndOf="@+id/divide" />
 
     <Button
         android:id="@+id/button3"

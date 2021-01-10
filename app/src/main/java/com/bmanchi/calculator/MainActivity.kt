@@ -50,6 +50,7 @@ class MainActivity : AppCompatActivity() {
         val buttonPlus: Button = findViewById(R.id.plus)
         val buttonDivide: Button = findViewById(R.id.divide)
         val buttonMultiply: Button = findViewById(R.id.multiply)
+        val buttonNeg: Button = findViewById(R.id.buttonNeg)
 
         val listener = View.OnClickListener { v ->
             val b = v as Button
@@ -86,7 +87,24 @@ class MainActivity : AppCompatActivity() {
         buttonMinus.setOnClickListener(opListener)
         buttonMultiply.setOnClickListener(opListener)
         buttonDivide.setOnClickListener(opListener)
+        buttonNeg.setOnClickListener(opListener)
 
+        buttonNeg.setOnClickListener { View ->
+            val value = newNumber.text.toString()
+            if (value.isEmpty()) {
+                newNumber.setText("-")
+            } else {
+                try {
+                    var doubleValue = value.toDouble()
+                    doubleValue *=-1
+                    newNumber.setText(doubleValue.toString())
+                } catch (e: NumberFormatException) {
+                    // newNumber was "-" or ".", so clear it
+                    newNumber.setText("")
+                }
+            }
+
+        }
     }
 
     private fun performOperation(value: Double, operation: String) {
