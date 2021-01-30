@@ -1,15 +1,11 @@
 package com.bmanchi.calculator
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
-import java.lang.NumberFormatException
 import kotlinx.android.synthetic.main.activity_main.*
 
 //Unused when ViewModel replaces saveinstance
@@ -19,6 +15,7 @@ private const val OPERATION_CONTENTS = "Operation contents"
 private const val OPERAND_BOOLEAN = "Operation is null"
 */
 
+@Suppress("DEPRECATION")
 class MainActivity : AppCompatActivity() {
 
 //    private lateinit var result: EditText
@@ -26,15 +23,21 @@ class MainActivity : AppCompatActivity() {
 //    private val operation by lazy(LazyThreadSafetyMode.NONE) { findViewById<TextView>(R.id.operation) }
 
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val viewModel = ViewModelProviders.of(this).get(CalculatorViewModel::class.java)
-        viewModel.result.observe(this, Observer<String>{stringResult -> result.setText(stringResult)})
-        viewModel.newNumber.observe(this, Observer {stringNumber -> newNumber.setText(stringNumber)})
-        viewModel.operation.observe(this, Observer { stringOperation -> operation.text = stringOperation })
+//        val viewModel = ViewModelProviders.of(this).get(CalculatorViewModel::class.java)
+        val viewModel = ViewModelProviders.of(this).get(BigDecimalViewModel::class.java)
+        viewModel.stringResult.observe(
+            this,
+            Observer { stringResult -> result.setText(stringResult) })
+        viewModel.stringNewNumber.observe(
+            this,
+            Observer { stringNumber -> newNumber.setText(stringNumber) })
+        viewModel.stringOperation.observe(
+            this,
+            Observer { stringOperation -> operation.text = stringOperation })
 
         /*result = findViewById(R.id.result)
         newNumber = findViewById(R.id.newNumber)
@@ -81,17 +84,17 @@ class MainActivity : AppCompatActivity() {
         dot.setOnClickListener(listener)
 
         val opListener = View.OnClickListener { v ->
-           /*//Replaced by ViewModel
-            val op = (v as Button).text.toString()
-            try {
-                val value = newNumber.text.toString().toDouble()
-                performOperation(value, op)
+            /*//Replaced by ViewModel
+             val op = (v as Button).text.toString()
+             try {
+                 val value = newNumber.text.toString().toDouble()
+                 performOperation(value, op)
 
-            } catch (e: NumberFormatException) {
-                newNumber.setText("")
-            }
-            pendingOperation = op
-            displayOperation.text = pendingOperation*/
+             } catch (e: NumberFormatException) {
+                 newNumber.setText("")
+             }
+             pendingOperation = op
+             displayOperation.text = pendingOperation*/
             viewModel.operandPressed((v as Button).text.toString())
         }
 
@@ -117,7 +120,7 @@ class MainActivity : AppCompatActivity() {
                     newNumber.setText("")
                 }
             }*/
-        viewModel.negPressed()
+            viewModel.negPressed()
         }
     }
     /*
